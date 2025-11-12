@@ -5,7 +5,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const authorizedPlayers = ["9900531658"];
+const authorizedPlayers = ["9900531658", "1789159720"];
 
 app.post("/checkAuth", (req, res) => {
     const { playerId } = req.body;
