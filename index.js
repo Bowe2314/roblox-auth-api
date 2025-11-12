@@ -1,19 +1,19 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
 const app = express();
-const port = process.env.PORT || 3000;
 
-const authorizedPlayers = ["123456", "654321"]; // replace with actual IDs
-
+app.use(cors());
 app.use(express.json());
 
-app.post('/checkAuth', (req, res) => {
+const authorizedPlayers = ["9900531658"];
+
+app.post("/checkAuth", (req, res) => {
     const { playerId } = req.body;
     if (!playerId) return res.status(400).json({ error: "playerId required" });
 
     const isAuthorized = authorizedPlayers.includes(playerId);
-    res.json({ authorized: isAuthorized });
+    res.json({ authenticated: isAuthorized, message: isAuthorized ? "Player authorized" : "Player not authorized" });
 });
 
-app.listen(port, () => {
-    console.log(`Auth API running on port ${port}`);
-});
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Auth API running on port ${port}`));
